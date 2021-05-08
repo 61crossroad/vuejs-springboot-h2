@@ -37,9 +37,9 @@ build/
 
 #### from vue.js, modified ####
 node_modules
-/front-end/dist
+front-end/dist
 
-/front-end/tests/e2e/reports/
+front-end/tests/e2e/reports/
 selenium-debug.log
 chromedriver.log
 geckodriver.log
