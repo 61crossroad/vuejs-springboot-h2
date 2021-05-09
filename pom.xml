@@ -85,7 +85,22 @@
 								<argument>install</argument>
 							</arguments>
 						</configuration>
-					</execution>
+          </execution>
+          <execution>
+            <id>front-end unit test</id>
+            <goals>
+              <goal>exec</goal>
+            </goals>
+            <phase>prepare-package</phase>
+            <configuration>
+              <workingDirectory>${basedir}/front-end</workingDirectory>
+              <executable>npm</executable>
+              <arguments>
+                <argument>run</argument>
+                <argument>test:unit</argument>
+              </arguments>
+            </configuration>
+          </execution>
 					<execution>
 						<id>front-end build package</id>
 						<goals>
@@ -100,7 +115,22 @@
 								<argument>build</argument>
 							</arguments>
 						</configuration>
-					</execution>
+          </execution>
+          <execution>
+            <id>front-end e2e test</id>
+            <goals>
+              <goal>exec</goal>
+            </goals>
+            <phase>integration-test</phase>
+            <configuration>
+              <workingDirectory>${basedir}/front-end</workingDirectory>
+              <executable>npm</executable>
+              <arguments>
+                <argument>run</argument>
+                <argument>test:e2e</argument>
+              </arguments>
+            </configuration>
+          </execution>
 				</executions>
 				<configuration>
 					<workingDirectory>${basedir}/front-end</workingDirectory>
