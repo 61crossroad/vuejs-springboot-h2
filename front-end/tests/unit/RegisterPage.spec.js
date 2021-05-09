@@ -2,9 +2,12 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import { mount, createLocalVue } from '@vue/test-utils'
 import RegisterPage from '@/views/RegisterPage'
+import Vuelidate from 'vuelidate'
+import registrationService from '@/services/registration'
 
 const localVue = createLocalVue()
 localVue.use(VueRouter)
+localVue.use(Vuelidate)
 const router = new VueRouter()
 
 jest.mock('@/services/registration')
@@ -74,14 +77,14 @@ describe('RegisterPage.vue', () => {
   })
   */
 
-  /*
-  it('should register when it is a new user', () => {
+  // async, await
+  it('should register when it is a new user', async () => {
     const stub = jest.fn()
     wrapper.vm.$router.push = stub
     wrapper.vm.form.username = 'sunny'
     wrapper.vm.form.emailAddress = 'sunny@local'
     wrapper.vm.form.password = 'Jest!'
-    wrapper.vm.submitForm()
+    await wrapper.vm.submitForm()
     wrapper.vm.$nextTick(() => {
       expect(stub).toHaveBeenCalledWith({name: 'LoginPage'})
     })
@@ -94,6 +97,16 @@ describe('RegisterPage.vue', () => {
     wrapper.vm.$nextTick(null, () => {
       expect(wrapper.find('.failed').isVisible()).toBe(true)
     })
+  })
+
+  /*
+  it('should fail when the email address is invalid', () => {
+    const spy = jest.spyOn(registrationService, 'register')
+    wrapper.vm.form.emailAddress = 'bad-email-address'
+    wrapper.vm.submitForm()
+    expect(spy).not.toHaveBeenCalled()
+    spy.mockReset()
+    spy.mockRestore()
   })
   */
 })
