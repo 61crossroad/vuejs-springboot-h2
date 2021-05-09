@@ -34,6 +34,7 @@ build/
 
 ### VS Code ###
 .vscode/
+.editorconfig
 
 #### from vue.js, modified ####
 node_modules
@@ -43,7 +44,6 @@ front-end/tests/e2e/reports/
 selenium-debug.log
 chromedriver.log
 geckodriver.log
-.editorconfig
 
 
 # local env files
@@ -62,3 +62,4 @@ pnpm-debug.log*
 *.njsproj
 *.sln
 *.sw?
+
