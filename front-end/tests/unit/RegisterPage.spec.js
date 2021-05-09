@@ -18,6 +18,7 @@ describe('RegisterPage.vue', () => {
   let fieldEmailAddress
   let fieldPassword
   let buttonSubmit
+  // let registerSpy
 
   beforeEach(() => {
     wrapper = mount(RegisterPage, {
@@ -28,10 +29,14 @@ describe('RegisterPage.vue', () => {
     fieldEmailAddress = wrapper.find('#emailAddress')
     fieldPassword = wrapper.find('#password')
     buttonSubmit = wrapper.find('form button[type="submit"]')
+
+    // registerSpy = jest.spyOn(registrationService, 'register')
   })
 
   afterAll(() => {
     jest.restoreAllMocks()
+    // registerSpy.mockReset()
+    // registerSpy.mockRestore()
   })
 
   it('should render registration form', () => {
@@ -79,6 +84,8 @@ describe('RegisterPage.vue', () => {
 
   // async, await
   it('should register when it is a new user', async () => {
+    expect.assertions(2)
+    const spy = jest.spyOn(registrationService, 'register')
     const stub = jest.fn()
     wrapper.vm.$router.push = stub
     wrapper.vm.form.username = 'sunny'
@@ -86,16 +93,22 @@ describe('RegisterPage.vue', () => {
     wrapper.vm.form.password = 'Jest!Jest!'
     await wrapper.vm.$nextTick()
     wrapper.vm.submitForm()
+    expect(spy).toBeCalled()
     await wrapper.vm.$nextTick(() => {
       expect(stub).toHaveBeenCalledWith({name: 'LoginPage'})
     })
+    spy.mockReset()
+    spy.mockRestore()
   })
 
   it('should fail it is not a new user', async () => {
-    wrapper.vm.form.emailAddress = 'ted@local'
+    // expect.assertions(3)
+
+    wrapper.vm.form.emailAddress = 'ted@local.com'
     expect(wrapper.find('.failed').isVisible()).toBe(false)
     await wrapper.vm.$nextTick()
     wrapper.vm.submitForm()
+    // expect(registerSpy).toBeCalled()
     await wrapper.vm.$nextTick(null, () => {
       expect(wrapper.find('.failed').isVisible()).toBe(true)
     })
