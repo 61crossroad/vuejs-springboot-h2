@@ -82,24 +82,23 @@ describe('RegisterPage.vue', () => {
     const stub = jest.fn()
     wrapper.vm.$router.push = stub
     wrapper.vm.form.username = 'sunny'
-    wrapper.vm.form.emailAddress = 'sunny@local'
-    wrapper.vm.form.password = 'Jest!'
+    wrapper.vm.form.emailAddress = "sunny@local.com"
+    wrapper.vm.form.password = 'Jest!Jest!'
     await wrapper.vm.submitForm()
     wrapper.vm.$nextTick(() => {
       expect(stub).toHaveBeenCalledWith({name: 'LoginPage'})
     })
   })
 
-  it('should fail it is not a new user', () => {
+  it('should fail it is not a new user', async () => {
     wrapper.vm.form.emailAddress = 'ted@local'
     expect(wrapper.find('.failed').isVisible()).toBe(false)
     wrapper.vm.submitForm()
-    wrapper.vm.$nextTick(null, () => {
+    await wrapper.vm.$nextTick(null, () => {
       expect(wrapper.find('.failed').isVisible()).toBe(true)
     })
   })
 
-  /*
   it('should fail when the email address is invalid', () => {
     const spy = jest.spyOn(registrationService, 'register')
     wrapper.vm.form.emailAddress = 'bad-email-address'
@@ -108,5 +107,4 @@ describe('RegisterPage.vue', () => {
     spy.mockReset()
     spy.mockRestore()
   })
-  */
 })

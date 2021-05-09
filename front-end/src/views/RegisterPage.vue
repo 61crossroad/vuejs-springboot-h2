@@ -38,7 +38,7 @@
 
 <script>
 import registrationService from '@/services/registration'
-import { required, email, minLength, maxLength, alphaNum } from 'Vuelidate/lib/validators'
+import { required, email, minLength, maxLength, alphaNum } from 'vuelidate/lib/validators'
 
 export default {
   name: 'RegisterPage',
@@ -74,10 +74,10 @@ export default {
   },
   methods: {
     submitForm () {
-      /* this.$v.$touch()
+      this.$v.$touch()
       if (this.$v.$invalid) {
         return
-      } */
+      }
       registrationService.register(this.form)
         .then(() => {
           this.$router.push({ name: 'LoginPage' })
