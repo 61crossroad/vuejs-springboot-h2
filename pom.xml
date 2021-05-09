@@ -203,7 +203,7 @@
 				</executions>
 			</plugin>
 			<plugin>
-				<artifactId>maven-clean-pluhin</artifactId>
+				<artifactId>maven-clean-plugin</artifactId>
 				<version>3.1.0</version>
 				<configuration>
 					<filesets>
