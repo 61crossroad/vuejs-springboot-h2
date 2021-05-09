@@ -84,8 +84,9 @@ describe('RegisterPage.vue', () => {
     wrapper.vm.form.username = 'sunny'
     wrapper.vm.form.emailAddress = "sunny@local.com"
     wrapper.vm.form.password = 'Jest!Jest!'
-    await wrapper.vm.submitForm()
-    wrapper.vm.$nextTick(() => {
+    await wrapper.vm.$nextTick()
+    wrapper.vm.submitForm()
+    await wrapper.vm.$nextTick(() => {
       expect(stub).toHaveBeenCalledWith({name: 'LoginPage'})
     })
   })
@@ -93,6 +94,7 @@ describe('RegisterPage.vue', () => {
   it('should fail it is not a new user', async () => {
     wrapper.vm.form.emailAddress = 'ted@local'
     expect(wrapper.find('.failed').isVisible()).toBe(false)
+    await wrapper.vm.$nextTick()
     wrapper.vm.submitForm()
     await wrapper.vm.$nextTick(null, () => {
       expect(wrapper.find('.failed').isVisible()).toBe(true)
