@@ -2,7 +2,9 @@ package com.taskagile.web.apis;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.taskagile.domain.application.UserService;
+import com.taskagile.domain.model.user.EmailAddressExistsException;
 import com.taskagile.domain.model.user.UsernameExistsException;
+import com.taskagile.utils.JsonUtils;
 import com.taskagile.web.payload.RegistrationPayload;
 
 import org.junit.jupiter.api.Test;
@@ -52,5 +54,24 @@ public class RegistrationApiControllerTests {
       .andExpect(status().is(400))
       .andExpect(jsonPath("$.message").value("Username already exists"));
 
+  }
+
+  @Test
+  public void register_existedEmailAddress_shouldFailAndReturn400() throws Exception {
+    RegistrationPayload payload = new RegistrationPayload();
+    payload.setUsername("test");
+    payload.setEmailAddress("exist@taskagile.com");
+    payload.setPassword("MyPassword!");
+
+    doThrow(EmailAddressExistsException.class)
+      .when(serviceMock)
+      .register(payload.toCommand());
+
+    mvc.perform(
+      post("/api/registrations")
+        .contentType(MediaType.APPLICATION_JSON)
+        .content(JsonUtils.toJson(payload)))
+    .andExpect(status().is(400))
+    .andExpect(jsonPath("$.message").value("Email address already exists"));
   }
 }
