@@ -8,7 +8,9 @@ import com.taskagile.domain.application.commands.RegistrationCommand;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
+@ToString
 @Setter
 @Getter
 public class RegistrationPayload {

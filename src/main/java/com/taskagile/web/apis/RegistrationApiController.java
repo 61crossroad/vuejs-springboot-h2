@@ -15,6 +15,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Controller
 public class RegistrationApiController {
   private UserService service;
@@ -25,6 +28,8 @@ public class RegistrationApiController {
 
   @PostMapping("/api/registrations")
   public ResponseEntity<ApiResult> register(@Valid @RequestBody RegistrationPayload payload) {
+    log.info("/api/registrations");
+    log.info(payload.toString());
     try {
       service.register(payload.toCommand());
       return Result.created();
