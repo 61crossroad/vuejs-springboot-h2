@@ -1,9 +1,11 @@
 package com.taskagile.domain.application.commands;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
+import org.springframework.util.Assert;
 
-@EqualsAndHashCode
+import lombok.Getter;
+import lombok.ToString;
+
+@ToString
 @Getter
 public class RegistrationCommand {
   private String username;
@@ -11,8 +13,30 @@ public class RegistrationCommand {
   private String password;
 
   public RegistrationCommand(String username, String emailAddress, String password) {
+    Assert.hasText(username, "Parameter `username` must not be empty");
+    Assert.hasText(emailAddress, "Parameter `emailAddress` must not be empty");
+    Assert.hasText(password, "Parameter `password` must not be empty");
+
     this.username = username;
     this.emailAddress = emailAddress;
     this.password = password;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    RegistrationCommand that = (RegistrationCommand) o;
+    if (username != null ? !username.equals(that.username) : that.username != null) return false;
+    if (emailAddress != null ? !emailAddress.equals(that.emailAddress) : that.emailAddress != null) return false;
+    return password != null ? password.equals(that.password) : that.password == null;
+  }
+
+  @Override
+  public int hashCode() {
+    int result = username != null ? username.hashCode() : 0;
+    result = 31 * result + (emailAddress != null ? emailAddress.hashCode() : 0);
+    result = 31 * result + (password != null ? password.hashCode() : 0);
+    return result;
   }
 }
