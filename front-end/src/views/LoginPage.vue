@@ -61,9 +61,9 @@ export default {
       }
     }
   },
-  method: {
+  methods: {
     submitForm () {
-      this.$v.touch()
+      this.$v.$touch()
       if (this.$v.$invalid) {
         return
       }

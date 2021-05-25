@@ -2,9 +2,11 @@ package com.taskagile.domain.common.mail;
 
 import java.util.Objects;
 
+import lombok.Getter;
 import lombok.ToString;
 
 @ToString
+@Getter
 public class MessageVariable {
   private String key;
   private Object value;
