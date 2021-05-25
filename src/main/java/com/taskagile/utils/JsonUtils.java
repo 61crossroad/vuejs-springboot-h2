@@ -1,5 +1,7 @@
 package com.taskagile.utils;
 
+import java.io.IOException;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -7,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public final class JsonUtils {
+
   private static final Logger log = LoggerFactory.getLogger(JsonUtils.class);
 
   private JsonUtils() {}
@@ -17,6 +20,16 @@ public final class JsonUtils {
       return mapper.writeValueAsString(object);
     } catch (JsonProcessingException e) {
       log.error("Failed to convert object to JSON string", e);
+      return null;
+    }
+  }
+
+  public static <T> T toObject(String json, Class<T> clazz) {
+    try {
+      ObjectMapper objectMapper = new ObjectMapper();
+      return objectMapper.readValue(json, clazz);
+    } catch (IOException e) {
+      log.error("Failed to convert string `" + json + "` class `" + clazz.getName() + "`", e);
       return null;
     }
   }

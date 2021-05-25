@@ -1,7 +1,5 @@
 package com.taskagile.domain.common.mail;
 
-import java.util.Arrays;
-
 import org.springframework.stereotype.Component;
 
 import lombok.extern.slf4j.Slf4j;
