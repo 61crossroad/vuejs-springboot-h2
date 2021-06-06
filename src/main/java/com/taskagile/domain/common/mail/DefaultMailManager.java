@@ -10,7 +10,6 @@ public class DefaultMailManager implements MailManager {
 
   @Override
   public void send(String emailAddress, String subject, String template, MessageVariable... variables) {
-    // TODO Auto-generated method stub
     log.info("[send email] {} -> {}", emailAddress, subject);
   }
 }
