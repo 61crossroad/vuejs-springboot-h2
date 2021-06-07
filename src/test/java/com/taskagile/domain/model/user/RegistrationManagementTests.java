@@ -1,5 +1,6 @@
 package com.taskagile.domain.model.user;
 
+import static org.mockito.Mockito.doNothing;
 // import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.inOrder;
@@ -58,8 +59,8 @@ public class RegistrationManagementTests {
     when(repositoryMock.findByUsername(username)).thenReturn(null);
     when(repositoryMock.findByEmailAddress(emailAddress)).thenReturn(null);
     // JpaRepository extended
-    // doNothing().when(repositoryMock).save(newUser);
-    doReturn(newUser).when(repositoryMock).save(newUser);
+    doNothing().when(repositoryMock).save(newUser);
+    // doReturn(newUser).when(repositoryMock).save(newUser);
 
     when(passwordEncryptorMock.encrypt(password)).thenReturn("EncryptedPassword");
 
