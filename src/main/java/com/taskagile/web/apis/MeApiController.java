@@ -2,6 +2,7 @@ package com.taskagile.web.apis;
 
 import java.util.List;
 
+import com.taskagile.domain.application.BoardService;
 import com.taskagile.domain.application.TeamService;
 import com.taskagile.domain.common.security.CurrentUser;
 import com.taskagile.domain.model.board.Board;

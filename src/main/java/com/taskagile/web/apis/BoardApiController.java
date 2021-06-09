@@ -1,5 +1,6 @@
 package com.taskagile.web.apis;
 
+import com.taskagile.domain.application.BoardService;
 import com.taskagile.domain.common.security.CurrentUser;
 import com.taskagile.domain.model.board.Board;
 import com.taskagile.domain.model.user.SimpleUser;
