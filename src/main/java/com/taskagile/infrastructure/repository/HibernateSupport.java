@@ -4,7 +4,7 @@ import javax.persistence.EntityManager;
 
 import org.hibernate.Session;
 
-public class HibernateSupport {
+public class HibernateSupport<T> {
 
   EntityManager entityManager;
 
@@ -16,4 +16,8 @@ public class HibernateSupport {
     return entityManager.unwrap(Session.class);
   }
 
+  public void save(T object) {
+    entityManager.persist(object);
+    entityManager.flush();
+  }
 }
