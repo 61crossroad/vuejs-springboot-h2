@@ -7,4 +7,9 @@ import com.taskagile.domain.model.board.BoardId;
 public interface CardRepository {
 
   List<Card> findByBoardId(BoardId boardId);
+
+  void save(Card card);
+
+  void changePosition(List<CardPosition> cardPositions);
+
 }

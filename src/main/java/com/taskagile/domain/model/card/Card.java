@@ -12,13 +12,13 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import com.taskagile.domain.common.model.AbstractBaseId;
+import com.taskagile.domain.common.model.AbstractBaseEntity;
 import com.taskagile.domain.model.cardList.CardListId;
 import com.taskagile.domain.model.user.UserId;
 
 @Entity
 @Table(name = "card")
-public class Card extends AbstractBaseId {
+public class Card extends AbstractBaseEntity {
 
   private static final long serialVersionUID = 6030626206663838257L;
 
